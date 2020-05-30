@@ -44,11 +44,11 @@ startGame = () => {
     score = 0; 
     availableQuestions = [...questions];
     getNewQuestion();
-}
+};
 
 getNewQuestion = () => {
 
-    if (availableQuestions.length == 0 || questionCounter >= MAX_QUESITONS){
+    if (availableQuestions.length === 0 || questionCounter >= MAX_QUESITONS){
       // Go to the final page 
       return(window.location.assign('/end.html'));
     }
@@ -65,7 +65,7 @@ getNewQuestion = () => {
     availableQuestions.splice(questionIndex, 1);
 
     acceptingAnswers = true;
-}
+};
 
 choices.forEach(choice => {
   choice.addEventListener('click', e => {
@@ -75,7 +75,16 @@ choices.forEach(choice => {
     const selectedChoice = e.target;
     const selectedAnswer = selectedChoice.dataset['number'];
 
-    getNewQuestion();
+    const classToApply = selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect'
+
+    // Adds a class to the element
+    selectedChoice.parentElement.classList.add(classToApply);
+    
+    setTimeout( () => {
+      selectedChoice.parentElement.classList.remove(classToApply);
+      getNewQuestion();
+    }, 1000);
+    
   });
 });
 

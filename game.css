@@ -25,3 +25,10 @@
     width: 100%;
 }
 
+.correct {
+    background-color: #28A745;
+}
+
+.incorrect {
+    background-color: #DC3545;
+}
